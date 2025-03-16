@@ -1,3 +1,8 @@
+<<<<<<< HEAD
+=======
+import React from "react";
+
+>>>>>>> af8c3804d7e38d03589eaf6a5fcddb5053513834
 const MovieCard = ({ title, genre, rating, image, onWatchClick }) => (
   <div className="movie-card">
     <img src={image} alt={title} className="movie-image" />
@@ -9,3 +14,4 @@ const MovieCard = ({ title, genre, rating, image, onWatchClick }) => (
 );
 
 export default MovieCard;
+

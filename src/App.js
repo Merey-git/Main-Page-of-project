@@ -1,4 +1,7 @@
+<<<<<<< HEAD
 // App.js (обновлённый — передаёт selectedMovie в MovieModal)
+=======
+>>>>>>> af8c3804d7e38d03589eaf6a5fcddb5053513834
 import React, { useRef, useState } from "react";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
