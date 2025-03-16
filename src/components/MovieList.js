@@ -230,11 +230,7 @@ const MovieList = ({ onMovieClick }) => {
           <MovieCard
           key={movie.id}
           {...movie}
-<<<<<<< HEAD
-          onWatchClick={() => onMovieClick(movie)} // ← ВАЖНО!
-=======
           onWatchClick={() => onMovieClick(movie)} 
->>>>>>> af8c3804d7e38d03589eaf6a5fcddb5053513834
         />        
         ))}
       </div>
@@ -250,11 +246,7 @@ const MovieList = ({ onMovieClick }) => {
           <MovieCard
           key={cartoon.id}
           {...cartoon}
-<<<<<<< HEAD
-          onWatchClick={() => onMovieClick(cartoon)} // тоже передай!
-=======
           onWatchClick={() => onMovieClick(cartoon)}   
->>>>>>> af8c3804d7e38d03589eaf6a5fcddb5053513834
         />        
         ))}
       </div>
