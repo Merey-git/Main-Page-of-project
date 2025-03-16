@@ -7,11 +7,7 @@ const Contact = () => {
     message: ""
   });
 
-<<<<<<< HEAD
-  const [isSubmitted, setIsSubmitted] = useState(false); // новое состояние
-=======
   const [isSubmitted, setIsSubmitted] = useState(false); 
->>>>>>> af8c3804d7e38d03589eaf6a5fcddb5053513834
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -70,4 +66,5 @@ const Contact = () => {
 };
 
 export default Contact;
+
 
