@@ -1,4 +1,3 @@
-// components/MovieModal.js (обновлённый красивый модал с описанием фильма)
 import React from "react";
 import "../styles.css";
 
