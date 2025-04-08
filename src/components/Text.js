@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 const Text = () => {
-    const [text, setText] = useState("");
+    const [text, setText] = useState(""); 
     const fullText = "Welcome to MovieZone - The Ultimate Movie Experience!";
     const speed = 40;
   
