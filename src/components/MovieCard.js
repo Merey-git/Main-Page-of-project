@@ -1,14 +1,21 @@
 import React from "react";
+import "./MovieCard.css";  
 
-const MovieCard = ({ title, genre, rating, image, onWatchClick }) => (
-  <div className="movie-card">
-    <img src={image} alt={title} className="movie-image" />
-    <h2 className="movie-title">{title}</h2>
-    <p className="movie-genre">{genre}</p>
-    <p className="movie-rating">⭐ {rating}</p>
-    <button className="watch-button" onClick={onWatchClick}>Watch Now</button>
-  </div>
-);
+const MovieCard = ({ movie, onWatchClick }) => {
+  return (
+    <div className="movie-card">
+      <img src={movie.image} alt={movie.title} className="movie-card-img" />
+        <div className="movie-card-content">
+        <h3 className="movie-card-title">{movie.title}</h3>
+        <p className="movie-card-genre">{movie.genre}</p>
+        <p className="movie-card-rating">Rating⭐: {movie.rating}</p>
+        <button onClick={() => onWatchClick(movie)} className="watch-btn">
+          Watch Now
+        </button>
+      </div>
+    </div>
+  );
+};
 
 export default MovieCard;
 
