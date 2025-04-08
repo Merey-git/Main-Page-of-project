@@ -1,15 +1,14 @@
 import React, { useState } from "react";
 import Text from "./Text";
 import MovieCard from "./MovieCard";
-import { useGenre } from "./GenreContext";
+import MovieModal from './MovieModal';
+import { FixedSizeList as List } from "react-window"; 
 
-const MovieList = ({ onMovieClick }) => {
-    const [search, setSearch] = useState("");
-    const [genreFilter, setGenreFilter] = useState("All");
-    const [showAllMovies, setShowAllMovies] = useState(false);
-    const [showAllCartoons, setShowAllCartoons] = useState(false);
-
-  const movies = [
+const MovieList = () => {
+  const [search, setSearch] = useState(""); 
+  const [genreFilter, setGenreFilter] = useState("All");  
+  const [selectedMovie, setSelectedMovie] = useState(null);  
+  const [movies] = useState([  
     { 
       id: 1, 
       title: "Inception", 
@@ -117,101 +116,110 @@ const MovieList = ({ onMovieClick }) => {
       image: "https://m.media-amazon.com/images/M/MV5BNGEwYjgwOGQtYjg5ZS00Njc1LTk2ZGEtM2QwZWQ2NjdhZTE5XkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg" , 
       description: "The Godfather is set in the 1940s and takes place entirely within the world of the Corleones, a fictional New York Mafia family. It opens inside the dark office of the family patriarch, Don Vito Corleone (also known as the Godfather and played by Brando), on the wedding day of his daughter, Connie (Talia Shire).",
       watchLink: "hhttps://rutube.ru/video/39568c110b232ad19985fb3a339f486d/"
-    }
-  ];
-
-  const cartoons = [
-    { 
-      id: 13, 
-      title: "Up", 
-      genre: "Animation", 
-      rating: 8.2, 
-      image: "https://upload.wikimedia.org/wikipedia/en/0/05/Up_%282009_film%29.jpg" , 
-      description: "The film centers on Carl Fredricksen (Asner), an elderly widower who travels to South America with youngster Russell (Nagai) in order to fulfill a promise that he made to his late wife Ellie. In the jungle, they encounter an exotic bird and discover someone who has sinister plans to capture it.",
-      watchLink: "https://rutube.ru/video/2d6140ad03a366357e6132ef389223f8/"
     },
-    { 
-      id: 14, 
-      title: "The Lion King", 
-      genre: "Animation", 
-      rating: 8.5, 
-      image: "https://m.media-amazon.com/images/I/71O29JaDRaL.jpg", 
-      description: "This Disney animated feature follows the adventures of the young lion Simba (Jonathan Taylor Thomas), the heir of his father, Mufasa (James Earl Jones). Simba's wicked uncle, Scar (Jeremy Irons), plots to usurp Mufasa's throne by luring father and son into a stampede of wildebeests." ,
-      watchLink: "https://rutube.ru/video/9719089b4bc4dd44aa253020ef5f7969/"
-    },
-    { 
-      id: 15, 
-      title: "Shrek", 
-      genre: "Animation", 
-      rating: 7.9, 
-      image: "https://m.media-amazon.com/images/I/71h5hqRz-0L.jpg" , 
-      description: "Shrek is a large, green-skinned, physically intimidating ogre with a Scottish accent. In Shrek Forever After, however, it is revealed that he is much smaller than the average ogre.",
-      watchLink: "https://rutube.ru/video/fb1864170ab76a01bf064a7d2f39e6ea/"
-    },
-    { 
-      id: 16, 
-      title: "Ratatouille", 
-      genre: "Animation", 
-      rating: 8.0, 
-      image: "https://c8.alamy.com/comp/BKA69P/ratatouille-year-2007-director-brad-bird-animation-movie-poster-usa-BKA69P.jpg", 
-      description: "Set mostly in Paris, the plot follows a young rat Remy (Oswalt) who dreams of becoming a chef at Auguste Gusteau's (Garrett) restaurant and tries to achieve his goal by forming an unlikely alliance with the restaurant's garbage boy Alfredo Linguini (Romano).",
-      watchLink: "https://rutube.ru/video/60a8c89da5d3fb2d4a35408b51541b21/"
-    },
-    { 
-      id: 17, 
-      title: "Frozen", 
-      genre: "Animation", 
-      rating: 7.4, 
-      image: "https://upload.wikimedia.org/wikipedia/en/8/89/Frozen_II_%282019_animated_film%29.jpg", 
-      description: "It follows Anna, the princess of Arendelle, who sets off on a journey with the iceman Kristoff, his reindeer Sven, and the snowman Olaf, to find her estranged sister Elsa after she accidentally traps their kingdom in eternal winter with her icy powers.",
-      watchLink: "https://rutube.ru/video/687c5bc34d3a37b51edbec9a2d6a5e77/"
-    },
-    { 
-      id: 18, 
-      title: "Finding Nemo", 
-      genre: "Animation", 
-      rating: 8.1, 
-      image: "https://m.media-amazon.com/images/I/61okEwMrP9S.jpg", 
-      description: "In the colorful and warm tropical waters of the Great Barrier Reef, a Clown Fish named Marlin lives safe and secluded in his anemone home with his only son, Nemo. Fearful of the ocean and its unpredictable risks, he struggles to protect his son. Nemo, like all young fish, is eager to explore the mysterious reef.",
-      watchLink: "https://rutube.ru/video/312d587243b4ac0f170537b38e76f245/"
-    },
-    { 
-      id: 19, 
-      title: "Coco", 
-      genre: "Animation", 
-      rating: 8.4, 
-      image: "https://i.ebayimg.com/images/g/xNYAAOSwsSVi-5oN/s-l400.jpg", 
-      description: "The story follows a 12-year-old boy named Miguel (Gonzalez) who is accidentally transported to the Land of the Dead, where he seeks the help of his deceased musician great-great-grandfather to return him to his family and reverse their ban on music.",
-      watchLink: "https://rutube.ru/video/7257c7c37d2198d688c37c1fe4e493cc/"
-    },
-    { 
-      id: 20, 
-      title: "Toy Story", 
-      genre: "Animation", 
-      rating: 8.3, 
-      image: "https://m.media-amazon.com/images/I/71aBLaC4TzL._AC_UF894,1000_QL80_.jpg", 
-      description: "Taking place in a world where toys come to life when humans are not present, the plot of Toy Story focuses on the relationship between an old-fashioned pullstring cowboy doll named Woody and a modern space cadet action figure, Buzz Lightyear, as Woody develops jealousy towards Buzz when he becomes their owner Andy's favorite toy.",
-      watchLink: "https://rutube.ru/video/1ea9cbc6ceed10d76295e4b293653086/"
-    }
-  ];
+  {
+    id: 13, 
+    title: "Up", 
+    genre: "Animation", 
+    rating: 8.2, 
+    image: "https://upload.wikimedia.org/wikipedia/en/0/05/Up_%282009_film%29.jpg" , 
+    description: "The film centers on Carl Fredricksen (Asner), an elderly widower who travels to South America with youngster Russell (Nagai) in order to fulfill a promise that he made to his late wife Ellie. In the jungle, they encounter an exotic bird and discover someone who has sinister plans to capture it.",
+    watchLink: "https://rutube.ru/video/2d6140ad03a366357e6132ef389223f8/"
+  },
+  { 
+    id: 14, 
+    title: "The Lion King", 
+    genre: "Animation", 
+    rating: 8.5, 
+    image: "https://m.media-amazon.com/images/I/71O29JaDRaL.jpg", 
+    description: "This Disney animated feature follows the adventures of the young lion Simba (Jonathan Taylor Thomas), the heir of his father, Mufasa (James Earl Jones). Simba's wicked uncle, Scar (Jeremy Irons), plots to usurp Mufasa's throne by luring father and son into a stampede of wildebeests." ,
+    watchLink: "https://rutube.ru/video/9719089b4bc4dd44aa253020ef5f7969/"
+  },
+  { 
+    id: 15, 
+    title: "Shrek", 
+    genre: "Animation", 
+    rating: 7.9, 
+    image: "https://m.media-amazon.com/images/I/71h5hqRz-0L.jpg" , 
+    description: "Shrek is a large, green-skinned, physically intimidating ogre with a Scottish accent. In Shrek Forever After, however, it is revealed that he is much smaller than the average ogre.",
+    watchLink: "https://rutube.ru/video/fb1864170ab76a01bf064a7d2f39e6ea/"
+  },
+  { 
+    id: 16, 
+    title: "Ratatouille", 
+    genre: "Animation", 
+    rating: 8.0, 
+    image: "https://c8.alamy.com/comp/BKA69P/ratatouille-year-2007-director-brad-bird-animation-movie-poster-usa-BKA69P.jpg", 
+    description: "Set mostly in Paris, the plot follows a young rat Remy (Oswalt) who dreams of becoming a chef at Auguste Gusteau's (Garrett) restaurant and tries to achieve his goal by forming an unlikely alliance with the restaurant's garbage boy Alfredo Linguini (Romano).",
+    watchLink: "https://rutube.ru/video/60a8c89da5d3fb2d4a35408b51541b21/"
+  },
+  { 
+    id: 17, 
+    title: "Frozen", 
+    genre: "Animation", 
+    rating: 7.4, 
+    image: "https://upload.wikimedia.org/wikipedia/en/8/89/Frozen_II_%282019_animated_film%29.jpg", 
+    description: "It follows Anna, the princess of Arendelle, who sets off on a journey with the iceman Kristoff, his reindeer Sven, and the snowman Olaf, to find her estranged sister Elsa after she accidentally traps their kingdom in eternal winter with her icy powers.",
+    watchLink: "https://rutube.ru/video/687c5bc34d3a37b51edbec9a2d6a5e77/"
+  },
+  { 
+    id: 18, 
+    title: "Finding Nemo", 
+    genre: "Animation", 
+    rating: 8.1, 
+    image: "https://m.media-amazon.com/images/I/61okEwMrP9S.jpg", 
+    description: "In the colorful and warm tropical waters of the Great Barrier Reef, a Clown Fish named Marlin lives safe and secluded in his anemone home with his only son, Nemo. Fearful of the ocean and its unpredictable risks, he struggles to protect his son. Nemo, like all young fish, is eager to explore the mysterious reef.",
+    watchLink: "https://rutube.ru/video/312d587243b4ac0f170537b38e76f245/"
+  },
+  { 
+    id: 19, 
+    title: "Coco", 
+    genre: "Animation", 
+    rating: 8.4, 
+    image: "https://i.ebayimg.com/images/g/xNYAAOSwsSVi-5oN/s-l400.jpg", 
+    description: "The story follows a 12-year-old boy named Miguel (Gonzalez) who is accidentally transported to the Land of the Dead, where he seeks the help of his deceased musician great-great-grandfather to return him to his family and reverse their ban on music.",
+    watchLink: "https://rutube.ru/video/7257c7c37d2198d688c37c1fe4e493cc/"
+  },
+  { 
+    id: 20, 
+    title: "Toy Story", 
+    genre: "Animation", 
+    rating: 8.3, 
+    image: "https://m.media-amazon.com/images/I/71aBLaC4TzL._AC_UF894,1000_QL80_.jpg", 
+    description: "Taking place in a world where toys come to life when humans are not present, the plot of Toy Story focuses on the relationship between an old-fashioned pullstring cowboy doll named Woody and a modern space cadet action figure, Buzz Lightyear, as Woody develops jealousy towards Buzz when he becomes their owner Andy's favorite toy.",
+    watchLink: "https://rutube.ru/video/1ea9cbc6ceed10d76295e4b293653086/"
+  } 
+  ]);
 
   const filteredMovies = movies.filter(movie =>
     movie.title.toLowerCase().includes(search.toLowerCase()) &&
     (genreFilter === "All" || movie.genre === genreFilter)
   );
 
+  const renderRow = ({ index, style }) => {
+    const movie = filteredMovies[index];
+    return (
+      <div style={style} className="movie-card-container">
+        <MovieCard movie={movie} onWatchClick={setSelectedMovie} />
+      </div>
+    );
+  };
+
   return (
     <div className="movie-list-container">
       <Text />
       <div className="search-bar">
-        <input
+        <input 
           type="text"
           className="search-input styled-input rounded-input"
           placeholder="Search movies..."
           value={search}
-          onChange={(e) => setSearch(e.target.value)}
+          onChange={(e) => setSearch(e.target.value)} 
         />
-        <select className="genre-filter styled-select rounded-select" onChange={(e) => setGenreFilter(e.target.value)}>
+        <select className="genre-filter styled-select rounded-select"
+          onChange={(e) => setGenreFilter(e.target.value)}
+          value={genreFilter}
+        >
           <option value="All">All Genres</option>
           <option value="Sci-Fi">Sci-Fi</option>
           <option value="Adventure">Adventure</option>
@@ -219,41 +227,21 @@ const MovieList = ({ onMovieClick }) => {
           <option value="Drama">Drama</option>
           <option value="Fantasy">Fantasy</option>
           <option value="Crime">Crime</option>
+          <option value="Animation">Animation</option>
         </select>
       </div>
-      <div className="header-container">
-        <h2 className="section-title">The best films by genre</h2>
-        <div className="title-line"></div>
-      </div>
-      <div className="movie-list">
-      {(showAllMovies ? filteredMovies : filteredMovies.slice(0, 4)).map((movie) => (
-          <MovieCard
-          key={movie.id}
-          {...movie}
-          onWatchClick={() => onMovieClick(movie)} 
-        />        
-        ))}
-      </div>
-      {movies.length > 4 && (
-        <button className="show-all-btn" onClick={() => setShowAllMovies(!showAllMovies)}>
-          {showAllMovies ? "Скрыть" : "Посмотреть все"}
-        </button>
-      )}
-      <h2 className="section-title">The best cartoons</h2>
-      <div className="title-line"></div>
-      <div className="movie-list">
-      {(showAllCartoons ? cartoons : cartoons.slice(0, 4)).map((cartoon) => (
-          <MovieCard
-          key={cartoon.id}
-          {...cartoon}
-          onWatchClick={() => onMovieClick(cartoon)}   
-        />        
-        ))}
-      </div>
-      {cartoons.length > 4 && (
-        <button className="show-all-btn" onClick={() => setShowAllCartoons(!showAllCartoons)}>
-          {showAllCartoons ? "Скрыть" : "Посмотреть все"}
-        </button>
+
+      <List
+        height={500} 
+        itemCount={filteredMovies.length}  
+        itemSize={280} 
+        width={1470}
+      >
+        {renderRow}
+      </List>
+
+      {selectedMovie && (
+        <MovieModal movie={selectedMovie} onClose={() => setSelectedMovie(null)} />
       )}
     </div>
   );
