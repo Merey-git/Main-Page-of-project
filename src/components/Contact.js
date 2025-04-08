@@ -10,7 +10,7 @@ const Contact = () => {
   const [isSubmitted, setIsSubmitted] = useState(false); 
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
+    const { name, value } = e.target; 
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
