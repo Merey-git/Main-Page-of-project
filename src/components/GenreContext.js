@@ -1,7 +1,7 @@
 import React, { createContext, useContext, useState } from "react";
 
 export const GenreContext = createContext();
-
+ 
 export const GenreProvider = ({ children }) => {
   const [genre, setGenre] = useState("All");
   return (
