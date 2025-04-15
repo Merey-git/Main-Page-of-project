@@ -18,4 +18,3 @@ const MovieCard = ({ movie, onWatchClick }) => {
 };
 
 export default MovieCard;
-

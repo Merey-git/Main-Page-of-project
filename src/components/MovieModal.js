@@ -1,10 +1,10 @@
 import React from "react";
 import "../styles.css";
+import PropTypes from 'prop-types';
 
-const MovieModal = ({ movie, onClose }) => {
+const MovieModal = ({ movie, onClose }) => { 
   if (!movie) return null;
-
-  return (
+    return (
     <div className="modal-overlay">
      <div className="modal-content">
       <button className="modal-close" onClick={onClose}>×</button>
@@ -31,4 +31,18 @@ const MovieModal = ({ movie, onClose }) => {
   );
 };
 
+MovieModal.propTypes = {
+  movie: PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    genre: PropTypes.string.isRequired,
+    rating: PropTypes.number.isRequired,
+    image: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    watchLink: PropTypes.string
+  }).isRequired,
+  onClose: PropTypes.func.isRequired
+};
+
 export default MovieModal;
+
+

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import PropTypes from 'prop-types';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -8,15 +9,16 @@ const Contact = () => {
   });
 
   const [isSubmitted, setIsSubmitted] = useState(false); 
+  
+  const handleChange = (e) => { 
+    const { name, value } = e.target;
 
-  const handleChange = (e) => {
-    const { name, value } = e.target; 
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
   const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log(formData);
+    e.preventDefault();  
+    console.log(formData); 
     setIsSubmitted(true); 
     setFormData({ name: "", email: "", message: "" }); 
     
@@ -65,6 +67,8 @@ const Contact = () => {
   );
 };
 
+Contact.propTypes = {
+  onSubmit: PropTypes.func.isRequired // Проверка, что передается функция для обработки отправки
+};
+
 export default Contact;
-
-

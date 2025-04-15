@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 .movie-card {
     display: flex;  
     align-items: center; 
@@ -77,3 +78,84 @@
   }
 
 
+=======
+.movie-card {
+    display: flex;  
+    align-items: center; 
+    justify-content: flex-start;
+    width: 90%;  
+    max-width: 100%; 
+    margin: 10px 50px; 
+    padding: 20px;
+    background-color: #2c3e50;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    color: #fff;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    max-height: 300px; 
+  }
+  
+  .movie-card:hover {
+    transform: scale(1.02);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+  }
+  
+ 
+  .movie-card-img {
+    width: 150px; 
+    height: auto; 
+    object-fit: cover;
+    border-radius: 10px;
+    margin-right: 20px;
+  }
+  
+  .movie-card-content {
+    display: flex;
+    flex-direction: column; 
+    justify-content: center;
+    width: 100%; 
+    padding: 0 10px; 
+  }
+  
+  .movie-card-title {
+    font-size: 1.4em;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  .movie-card-genre {
+    font-size: 1.1em;
+    color: #ecf0f1;
+    margin-bottom: 10px;
+  }
+  
+  .movie-card-rating {
+    font-size: 1.1em;
+    color: #f39c12;
+    margin-bottom: 10px;
+  }
+  
+  .watch-btn {
+    padding: 10px 20px;
+    background-color: #f39c12;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .watch-btn:hover {
+    background-color: #e67e22;
+  }
+  .movie-card-container {
+    margin-bottom: 20px;
+  }
+  
+  .movie-list-container {
+    padding: 40px;
+  }
+
+
+>>>>>>> 8a474d8 (test)
